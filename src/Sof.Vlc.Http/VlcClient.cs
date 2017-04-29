@@ -504,7 +504,7 @@ namespace Sof.Vlc.Http
 
 			try
 			{
-				response = await client.GetAsync("requests/status.xml" + (query ?? "?" + query));
+				response = await client.GetAsync("requests/status.xml" + (query == null ? "" : "?" + query));
 			}
 			catch (HttpRequestException)
 			{
