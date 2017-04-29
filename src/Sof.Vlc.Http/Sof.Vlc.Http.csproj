@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <PackageId>sof.vlc.httpinterface</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>Sean O'Flynn</Authors>
+    <PackageTags>vlc http web interface remote</PackageTags>
+    <Description>Find and control VLC media players through their HTTP interfaces.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Net.Ping" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Playlist\" />
+    <Folder Include="Data\Directory\" />
+    <Folder Include="Data\Status\" />
+  </ItemGroup>
+</Project>
