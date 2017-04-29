@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>Sof.Vlc.Http</id>
+        <version>1.0.1</version>
+        <title>Sof.Vlc.Http</title>
+        <authors>seanoflynn</authors>
+        <owners>seanoflynn</owners>
+        <licenseUrl>https://raw.githubusercontent.com/cheatdeath/Sof.Vlc.Http/master/LICENSE.txt</licenseUrl>
+        <projectUrl>https://github.com/cheatdeath/Sof.Vlc.Http</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Find and control VLC media players across a network using their HTTP interfaces.</description>
+        <releaseNotes>Initial release of the package.</releaseNotes>
+        <copyright>Copyright 2017</copyright>
+        <tags>vlc web http interface remote control controller</tags>
+        <dependencies>
+            <dependency id="System.Net.Ping" version="4.3.0"/>
+            <dependency id="System.Xml.XmlSerializer" version="4.3.0"/>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="../src/Sof.Vlc.Http/bin/Release/netstandard1.4/Sof.Vlc.Http.dll" target="lib/netstandard1.4/Sof.Vlc.Http.dll"/>  
+    </files>
+</package>
