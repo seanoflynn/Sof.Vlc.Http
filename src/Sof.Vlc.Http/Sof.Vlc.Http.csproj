@@ -17,6 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Fody" Version="2.1.2" />
+    <PackageReference Include="PropertyChanged.Fody" Version="2.1.4" />
     <PackageReference Include="System.Net.Ping" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
