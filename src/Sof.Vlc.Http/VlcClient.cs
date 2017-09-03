@@ -541,4 +541,5 @@ namespace Sof.Vlc.Http
 			}
 		}
 	}
+    public sealed class VlcClient : VlcPollable, INotifyPropertyChanged
 }
