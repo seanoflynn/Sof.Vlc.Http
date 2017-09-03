@@ -19,12 +19,12 @@ namespace Sof.Vlc.Http
         /// <summary>
         /// Occurs when the VLC instance cannot be reached.
         /// </summary>
-        public event EventHandler ConnectionChanged;
+        public event EventHandler<bool> ConnectionChanged;
 
         /// <summary>
         /// Occurs when status is updated, which can be regularly if polling is enabled.
         /// </summary>
-        public event EventHandler StatusUpdated;
+        public event EventHandler<VlcStatus> StatusUpdated;
 
         /// <summary>
         /// Occurs when a browse directory response is returned.
@@ -56,14 +56,22 @@ namespace Sof.Vlc.Http
             private set
             {
                 _isConnected = value;
-                ConnectionChanged?.Invoke(this, EventArgs.Empty);
+                ConnectionChanged?.Invoke(this, value);
             }
         }
 
         /// <summary>
         /// The current VLC media player and playback item's state.
         /// </summary>
-        public VlcStatus Status { get; private set; } = new VlcStatus();
+        public VlcStatus Status
+        {
+            get => _status;
+            private set
+            {
+                _status = value;
+                StatusUpdated?.Invoke(this, value);
+            }
+        }
 
         /// <summary>
         /// Http client for interacting with the VLC media player.
@@ -86,6 +94,7 @@ namespace Sof.Vlc.Http
         private XmlSerializer directorySerializer = new XmlSerializer(typeof(VlcDirectoryResponse));
 
         private bool _isConnected = false;
+        private VlcStatus _status = new VlcStatus();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Sof.Vlc.Http.VlcClient"/> class.
@@ -645,7 +654,6 @@ namespace Sof.Vlc.Http
             catch (HttpRequestException)
             {
                 IsConnected = false;
-                ConnectionChanged?.Invoke(this, new EventArgs());
                 return;
             }
 
@@ -663,13 +671,10 @@ namespace Sof.Vlc.Http
                 {
                     Console.WriteLine(e);
                 }
-
-                StatusUpdated?.Invoke(this, new EventArgs());
             }
             else if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
                 IsConnected = false;
-                ConnectionChanged?.Invoke(this, new EventArgs());
             }
             else
             {
