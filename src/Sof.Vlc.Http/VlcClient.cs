@@ -127,7 +127,11 @@ namespace Sof.Vlc.Http
 
             var encodedPassword = Convert.ToBase64String(Encoding.ASCII.GetBytes(":" + password));
 
-            client = new HttpClient {BaseAddress = new Uri("http://" + host + ":" + port + "/")};
+            client = new HttpClient
+            {
+                BaseAddress = new Uri("http://" + host + ":" + port + "/"),
+                Timeout = new TimeSpan(0, 0, 0, 0,500)
+            };
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encodedPassword);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
