@@ -499,7 +499,7 @@ namespace Sof.Vlc.Http
         /// <param name="playImmediately">If set to <c>true</c> start playback immediately.</param>
         private async Task Add(string uri, string name, VlcPlaylistAddMode options, bool playImmediately)
         {
-            StringBuilder command = new StringBuilder();
+            var command = new StringBuilder();
             command.Append("command=");
 
             command.Append(playImmediately ? "in_play" : "in_enqueue");
@@ -598,9 +598,9 @@ namespace Sof.Vlc.Http
         /// <param name="location">Location, default is the user's home folder file://~</param>
         public async Task<VlcDirectoryItem[]> GetDirectoryContents(string location = "file://~")
         {
-            string uri = "requests/browse.xml?uri=" + Uri.EscapeDataString(location);
+            var uri = "requests/browse.xml?uri=" + Uri.EscapeDataString(location);
 
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var response = await client.GetAsync(uri);
 
             // TODO: throw exception?
             if (!response.IsSuccessStatusCode)
@@ -608,7 +608,7 @@ namespace Sof.Vlc.Http
 
             var stream = await response.Content.ReadAsStreamAsync();
 
-            VlcDirectoryResponse dir = (VlcDirectoryResponse) directorySerializer.Deserialize(stream);
+            var dir = (VlcDirectoryResponse) directorySerializer.Deserialize(stream);
 
             DirectoryUpdated?.Invoke(this, dir.Items);
 
@@ -622,12 +622,12 @@ namespace Sof.Vlc.Http
         /// <param name="search">An optional search string.</param>
         public async Task<VlcPlaylistNode[]> GetPlaylist(string search = null)
         {
-            string uri = "requests/playlist.xml?search=";
+            var uri = "requests/playlist.xml?search=";
 
-            if (!String.IsNullOrWhiteSpace(search))
+            if (!string.IsNullOrWhiteSpace(search))
                 uri += Uri.EscapeDataString(search);
 
-            HttpResponseMessage response = await client.GetAsync(uri);
+            var response = await client.GetAsync(uri);
 
             // TODO: throw exception?
             if (!response.IsSuccessStatusCode)
@@ -635,7 +635,7 @@ namespace Sof.Vlc.Http
 
             var stream = await response.Content.ReadAsStreamAsync();
 
-            VlcPlaylistResponse pl = (VlcPlaylistResponse) playlistSerializer.Deserialize(stream);
+            var pl = (VlcPlaylistResponse) playlistSerializer.Deserialize(stream);
 
             PlaylistUpdated?.Invoke(this, pl.Items);
 
@@ -655,7 +655,7 @@ namespace Sof.Vlc.Http
             {
                 response = await client.GetAsync("requests/status.xml" + (query == null ? "" : "?" + query));
             }
-            catch (HttpRequestException)
+            catch
             {
                 IsConnected = false;
                 return;
