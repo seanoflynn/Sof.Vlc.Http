@@ -25,6 +25,5 @@
   <ItemGroup>
     <Folder Include="Data\Playlist\" />
     <Folder Include="Data\Directory\" />
-    <Folder Include="Data\Status\" />
   </ItemGroup>
 </Project>
