@@ -505,9 +505,9 @@ namespace Sof.Vlc.Http
             command.Append(playImmediately ? "in_play" : "in_enqueue");
 
             command.Append("&input=");
-            command.Append(Uri.EscapeDataString(uri));
+            command.Append(Uri.EscapeUriString(uri.Replace("/", "\\")));
 
-            if (!String.IsNullOrEmpty(name))
+            if (!string.IsNullOrEmpty(name))
             {
                 command.Append("&name=" + Uri.EscapeDataString(name));
             }
@@ -598,7 +598,7 @@ namespace Sof.Vlc.Http
         /// <param name="location">Location, default is the user's home folder file://~</param>
         public async Task<VlcDirectoryItem[]> GetDirectoryContents(string location = "file://~")
         {
-            var uri = "requests/browse.xml?uri=" + Uri.EscapeDataString(location);
+            var uri = "requests/browse.xml?dir=" + Uri.EscapeDataString(location);
 
             var response = await client.GetAsync(uri);
 
