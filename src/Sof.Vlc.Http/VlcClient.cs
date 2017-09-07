@@ -297,11 +297,11 @@ namespace Sof.Vlc.Http
         }
 
         /// <summary>
-        /// Set the player's absolute volume as a percentage (between 0-100%)
+        /// Set the player's absolute volume as a percentage (between 0-125%)
         /// </summary>
         public async Task SetPercentageVolume(int val)
         {
-            await SendCommand("command=volume&val=" + val + "%");
+            await SendCommand("command=volume&val=" + 320 * val / 125);
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace Sof.Vlc.Http
         /// </summary>
         public async Task SetRelativePercentageVolume(int relVal)
         {
-            await SendCommand("command=volume&val=" + (relVal > 0 ? "%2B" : "") + relVal + "%");
+            await SendCommand("command=volume&val=" + 320 * relVal / 125 + (relVal > 0 ? "%2B" : ""));
         }
 
         /// <summary>
