@@ -118,14 +118,10 @@ namespace Sof.Vlc.Http.Data
 		[XmlElement("stats")]
 		public VlcStatistics Statistics { get; set; }
 
-		/// <summary>
-		/// A list of streams such as audio tracks, video tracks, subtitle tracks.
-		/// </summary>
-		[XmlArray("information")]
-		[XmlArrayItem("category", typeof(VlcStream))]
-		public VlcStream[] Streams { get; set; } = new VlcStream[0];
+	    [XmlElement(ElementName = "information")]
+	    public Information Information { get; set; }
 
-		// TODO: audiofilters
-		// TODO: equalizer
-	}
+        // TODO: audiofilters
+        // TODO: equalizer
+    }
 }

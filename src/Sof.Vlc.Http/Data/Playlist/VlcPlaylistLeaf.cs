@@ -24,5 +24,11 @@ namespace Sof.Vlc.Http.Data
 		/// </summary>
 		[XmlAttribute("duration")]
 		public int Duration { get; set; }
+
+	    /// <summary>
+	    /// Equals to current when this is the current playlist item
+	    /// </summary>
+	    [XmlAttribute("current")]
+        public string Current { get; set; }
 	}
 }
